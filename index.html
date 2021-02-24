@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script src="script.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="styles.css"> -->
+  </head>
+  <body>
+    <h1>Hello there!</h1>
+    <a href="/me.html">My other page</a>
+
+    <form id="myForm" name="myForm" method="POST">
+    <div>
+        <input type="text" id="email" name="email" value="example@gmail.com">
+    </div>
+    <div>
+        <input type="password" id="password" name="password" value="123">
+    </div>
+        <input type="button" value="Submit!" onclick="submitInfo();">
+</form>
+
+  </body>
+  <script>
+    function submitInfo(){
+    
+    let form = document.forms["myForm"];
+    let fd = new FormData(form);
+    let data = {};
+    for (let [key, prop] of fd) {
+      data[key] = prop;
+    }
+    VALUE = JSON.stringify(data, null, 2);
+    console.log(VALUE);
+
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch('https://script.google.com/macros/s/AKfycbyc0UimHE4xcR49C8O3FDxPG7zAnAP7PfOLvqHzatOErnh5v_Rv0ilvDA/exec', {
+        method: 'POST',
+        headers: myHeaders,
+        mode: 'cors',
+        cache: 'default',
+        body: VALUE
+    })
+    .then(data => data.json())
+    .then(data =>  { console.log(data) }) 
+    .catch((err) => {
+        console.error(err);
+    })
+}
+  </script>
+</html>
