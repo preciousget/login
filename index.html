@@ -15,13 +15,12 @@
     <div>
         <input type="password" id="password" name="password" value="123">
     </div>
-        <input type="button" value="Submit!" onclick="submitInfo();">
+        <input type="button" value="Submit!" onclick="submitInfo();" >
 </form>
 
   </body>
   <script>
     function submitInfo(){
-    
     let form = document.forms["myForm"];
     let fd = new FormData(form);
     let data = {};
@@ -33,19 +32,22 @@
 
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
+ 
 
     fetch('https://script.google.com/macros/s/AKfycbyc0UimHE4xcR49C8O3FDxPG7zAnAP7PfOLvqHzatOErnh5v_Rv0ilvDA/exec', {
         method: 'POST',
         headers: myHeaders,
-        mode: 'cors',
+        mode: 'no-cors', // no-cors, *cors, same-origin
         cache: 'default',
         body: VALUE
     })
-    .then(data => data.json())
-    .then(data =>  { console.log(data) }) 
+    //.then(res => res.json())
+    //.then(res => res.json())
+    //.then(data => data.json())
+    .then(res =>  {console.log(res) }) 
     .catch((err) => {
         console.error(err);
     })
-}
+    }
   </script>
 </html>
